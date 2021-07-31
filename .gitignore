@@ -1,0 +1,5 @@
+# .vscode 文件夹
+.vscode
+
+# 忽略生成的exe文件
+*.exe
