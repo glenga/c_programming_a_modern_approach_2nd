@@ -20,3 +20,7 @@ int main(void) {
 
   return 0;
 }
+
+// Enter amount of loan: 20000.00
+// Enter interest rate: 6.0
+// Enter monthly payment: 386.6
