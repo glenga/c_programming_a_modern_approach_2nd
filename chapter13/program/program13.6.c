@@ -2,41 +2,37 @@
 #include <stdio.h>
 #include <string.h>
 
-#define NUM_PLANETS 9
-
-void str_toupper(const char *str, char *str_out);
+int cmp(char *str1, char *str2);
 
 int main(int argc, char *argv[]) {
-  const char *planets[] = {"Mercury", "Venus",  "Earth",   "Mars", "Jupiter",
-                           "Saturn",  "Uranus", "Neptune", "Pluto"};
-
   int i, j;
-  char buff_argv[50];
-  char buff_planets[50];
+  char *planet[] = {"Mercury", "Venus",  "Earth",   "Mars", "Jupiter",
+                    "Saturn",  "Uranus", "Neptune", "Pluto"};
 
   for (i = 1; i < argc; i++) {
-    str_toupper(argv[i], buff_argv);
-    for (j = 0; j < NUM_PLANETS; j++) {
-      str_toupper(planets[j], buff_planets);
-
-      if (strcmp(buff_argv, buff_planets) == 0) {
+    for (j = 0; j < 9; j++) {
+      if (cmp(argv[i], planet[j]) == 0) {
         printf("%s is planet %d\n", argv[i], j + 1);
         break;
       }
+      if (j == 8) {
+        printf("%s is not a planet\n", argv[i]);
+      }
     }
-
-    if (j == NUM_PLANETS)
-      printf("%s is not a planet\n", argv[i]);
   }
-
   return 0;
 }
 
-void str_toupper(const char *str, char *str_out) {
-  while (*str++)
-    *str_out++ = toupper(*str);
+int cmp(char *str1, char *str2) {
 
-  *str_out = '\0';
+  while (tolower(*str1) == tolower(*str2)) {
+    if (*str1 == '\0') {
+      return 0;
+    }
+    str1++;
+    str2++;
+  }
+  return *str1 - *str2;
 }
 
-// test: .\chapter13\program\program13.6.exe jupiter venus earth fred MARS
+// .\planet.exe planet Jupiter Venus Earth Fred
